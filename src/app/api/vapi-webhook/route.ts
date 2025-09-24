@@ -24,7 +24,7 @@ function verifySignature(secret: string | undefined, body: string, signatureHead
     const digest = hmac.digest('hex')
     // simple equality; in production use constant-time compare
     return digest === signatureHeader
-  } catch (err) {
+  } catch {
     return false
   }
 }

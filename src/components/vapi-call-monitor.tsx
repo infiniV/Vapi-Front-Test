@@ -86,7 +86,6 @@ export function VapiCallMonitor() {
   // Only listen connections are opened via WebSocket in the browser.
   const [wsConnection, setWsConnection] = useState<WebSocketConnection>({ url: '', ws: null, connected: false, retryCount: 0 });
   const [currentCall, setCurrentCall] = useState<CallResponse | null>(null);
-  const [selectedCredentialId, setSelectedCredentialId] = useState<string>("");
   const [manualCallMode, setManualCallMode] = useState<boolean>(false);
   const [rawCallResponse, setRawCallResponse] = useState<string>("");
   const [customMetadata, setCustomMetadata] = useState<Array<{key: string, value: string, id: number}>>([]);
@@ -513,7 +512,7 @@ export function VapiCallMonitor() {
       // Fallback to string coercion
       const fallback = String(data);
       return { parsed: fallback, isJson: false, raw: fallback };
-    } catch (err) {
+    } catch {
       return { parsed: `<unreadable binary>`, isJson: false, raw: '' };
     }
   };
@@ -543,7 +542,7 @@ export function VapiCallMonitor() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <SipTrunkManager onCredentialSelect={setSelectedCredentialId} />
+          <SipTrunkManager />
         </CardContent>
       </Card>
 
